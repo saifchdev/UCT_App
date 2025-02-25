@@ -1,0 +1,9 @@
+<!-- Dropdown for week selection -->
+<mat-form-field appearance="outline">
+    <mat-label>Select Week Start</mat-label>
+    <mat-select [(value)]="selectedWeekStart" (selectionChange)="onWeekChange($event.value)">
+      <mat-option *ngFor="let week of weekStarts" [value]="week">
+        {{ week | date:'MMM d, yyyy' }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
