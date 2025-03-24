@@ -1,107 +1,47 @@
 <div class="container">
-<app-week-selector class="weekselector"></app-week-selector>
-  <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+<app-week-selector class="weekselector"  ></app-week-selector>
+
+  <table mat-table *ngIf="isAvailable" #table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- ID Column -->
-    <ng-container matColumnDef="EmployeeId">
-        <th mat-header-cell *matHeaderCellDef>Project Code </th>
+     
+    <ng-container matColumnDef="ProjectName">
+        <th mat-header-cell *matHeaderCellDef>Project Name </th>
         <td mat-cell *matCellDef="let element">      
-            <mat-select [(ngModel)]="element.selectedProjectId">
-                <mat-option *ngFor="let project of projectdataSource;let i = index"  [value]="project.projectId">{{project.projectName}}</mat-option>
-            </mat-select>
+           {{element.projectName}}
 
         </td>
       </ng-container>
       <ng-container matColumnDef="Country">
         <th mat-header-cell *matHeaderCellDef> Country </th>
         <td mat-cell *matCellDef="let element">
-          {{ getCountry(element.selectedProjectId) }}
+          {{element.country}}
     </td>
+    
       </ng-container>
       <ng-container class="projCode" matColumnDef="ProjectCode">
         <th mat-header-cell *matHeaderCellDef> ProjectCode </th>
         <td mat-cell *matCellDef="let element">
           
-          {{ getProjectCode(element.selectedProjectId) }}
+          {{element.projectCode}}
       
     </td>
-      </ng-container>
+  </ng-container>
 
-      <ng-container matColumnDef="ActivityCode">
-        <th mat-header-cell *matHeaderCellDef> ActivityCode </th>
-        <td mat-cell *matCellDef="let element">
-          
-          <input class="DST_Input"
-          matInput
-          placeholder="D"
-          [value]=""
+  <ng-container class="projCode" matColumnDef="HoursWorked">
+    <th mat-header-cell *matHeaderCellDef> Hours this Week </th>
+    <td mat-cell *matCellDef="let element">
       
-        />
-        <input class="DST_Input"
-          matInput
-          placeholder="S"
-          [value]=""
-        
-        />
-        <input class="DST_Input"
-          matInput
-          placeholder="T"
-          [value]=""
-         
-        />
-        </td>
-      </ng-container>
-
-
-
-    <!-- Title Column -->
-    <ng-container matColumnDef="Days">
-      <th mat-header-cell *matHeaderCellDef> Timesheet </th>
-      <td mat-cell *matCellDef="let element">
   
-          
-          <input class="DST_Input" matInput placeholder="Sun" value="">
-      
-   
-          <input  class="DST_Input" matInput placeholder="Mon" value="">
-       
-       
-          <input class="DST_Input" matInput placeholder="Tue" value="">
-        
-          
-          <input class="DST_Input" matInput placeholder="Wed" value="">
-          
-         
-          <input class="DST_Input" matInput placeholder="Thu" value="">
-          
-      
-          <input class="DST_Input" matInput placeholder="Fri" value="">
-
-         
-          <input class="DST_Input" matInput placeholder="Sat" value="">
-
-        Total=
-    
-      </td>
-    </ng-container>
-   
-    
-    <!-- Body Column -->
-    <ng-container matColumnDef="body">
-      <th mat-header-cell *matHeaderCellDef>Remarks</th>
-      <td mat-cell *matCellDef="let element">
-        <input
-              matInput
-              placeholder="Remarks"
-           
-            />
-      </td>
-    </ng-container>
-
+      {{element.hoursWorked}}  
+</td>
+</ng-container>
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>action</th>
+      <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
-        <button class="deleteButton" mat-raised-button>Delete</button>
-        <button class="updateButton" mat-raised-button>Update</button>
+        <button mat-button (click)="openDetailsDialog(element.projectCode)">
+          More Details
+        </button>
+       
 
       </td>
     </ng-container>
@@ -111,5 +51,55 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <table mat-table *ngIf="!isAvailable" #table  class="mat-elevation-z8">
+    <!-- ID Column -->
+     
+    <ng-container matColumnDef="ProjectName">
+        <th mat-header-cell *matHeaderCellDef>Project Name </th>
+        <td mat-cell *matCellDef="let element">      
+           {{element.projectName}}
 
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Country">
+        <th mat-header-cell *matHeaderCellDef> Country </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.country}}
+    </td>
+    
+      </ng-container>
+      <ng-container class="projCode" matColumnDef="ProjectCode">
+        <th mat-header-cell *matHeaderCellDef> ProjectCode </th>
+        <td mat-cell *matCellDef="let element">
+          
+          {{element.projectCode}}
+      
+    </td>
+  </ng-container>
+
+  <ng-container class="projCode" matColumnDef="HoursWorked">
+    <th mat-header-cell *matHeaderCellDef> Hours this Week </th>
+    <td mat-cell *matCellDef="let element">
+      
+  
+      {{element.hoursWorked}}  
+</td>
+</ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button (click)="openDetailsDialog(element.projectCode)">
+          More Details
+        </button>
+       
+
+      </td>
+    </ng-container>
+
+   
+    <!-- Define the header and row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="button-center"><button  mat-raised-button (click)="openNewRecordDialog()">Add New Record</button></div>
 </div>

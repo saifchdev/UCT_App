@@ -1,4 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { ApiService } from '../../../services/api.service';
+import { DateService } from '../../../services/date-service.service';
 
 @Component({
   selector: 'app-week-selector',
@@ -6,19 +8,24 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./week-selector.component.css']
 })
 
+
   export class WeekSelectorComponent implements OnInit {
-    displayedColumns: string[] = [
-      'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'
-    ];
+    
+
+  constructor(private apiService: ApiService,  private dateService: DateService) {}
     dataSource: any[] = []; // Your table data
     weekStarts: Date[] = []; // Array to hold week-start dates
     selectedWeekStart: Date | null = null; // Selected week-start date
   
     ngOnInit(): void {
       this.calculateWeekStarts();
-      // Your existing initialization, e.g., fetchData()
+      if (this.weekStarts.length > 0) {
+        this.dateService.setSelectedDate(this.formatDate(this.weekStarts[0]));
+      }
     }
-  
+    private formatDate(date: Date): string {
+      return date.toISOString().split('T')[0]; // e.g., "2025-03-02"
+    }
     calculateWeekStarts(): void {
       const today = new Date(); // Current date: Feb 23, 2025
       const year = today.getFullYear();
@@ -46,11 +53,24 @@ import { Component,OnInit } from '@angular/core';
       this.weekStarts = weekStarts;
       this.selectedWeekStart = weekStarts[0]; // Default to first week
     }
+    onWeekChange(weekStart: Date): void {
+      const formattedDate = this.formatDate(weekStart);
+      this.dateService.setSelectedDate(formattedDate); // Update the Signal
+    }
   
     // Optional: Handle selection change
-    onWeekChange(weekStart: Date): void {
-      this.selectedWeekStart = weekStart;
-      // Add logic here to filter/update table data based on selected week
-      console.log('Selected week start:', weekStart);
-    }
+  //   onWeekChange(weekStart: string): void {
+  //     const formattedDate = this.formatDate(weekStart);
+  //     this.dateService.setSelectedDate(formattedDate); // Update the Sig
+      
+  //     // Add logic here to filter/update table data based on selected week
+  //     this.apiService.getDataByWeek(weekStart).subscribe(summarisedData => {
+  //       //this.dataSource = summarisedData;
+  //       this.dataEvent.emit( summarisedData );
+
+  //     //console.log('Selected week start:', summarisedData);
+  //   });
+  // }
+
+
   }

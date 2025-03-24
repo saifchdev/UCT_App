@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>Add new record</h2>
+<form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
+    <!-- Project Selection -->
+    <mat-form-field>
+      <mat-label>Project</mat-label>
+      <mat-select formControlName="projectId">
+        <mat-option *ngFor="let project of projects" [value]="project.projectId">
+          {{ project.projectCode }} - {{ project.country }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Auto-populated Fields -->
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <input matInput formControlName="country" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Project Code</mat-label>
+      <input matInput formControlName="projectCode" readonly>
+    </mat-form-field>
+  
+    <!-- Code Dropdowns -->
+    <mat-form-field>
+      <mat-label>Discipline Code</mat-label>
+      <mat-select formControlName="disciplineCodeId">
+        <mat-option *ngFor="let code of disciplineCodes" [value]="code.disciplineCodeId">{{ code.disciplineName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Stage Code</mat-label>
+      <mat-select formControlName="stageId">
+        <mat-option *ngFor="let code of stageCodes" [value]="code.stageId">{{ code.stageName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Task Code</mat-label>
+      <mat-select formControlName="taskId">
+        <mat-option *ngFor="let code of taskCodes" [value]="code.taskId">{{ code.taskName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Hours Inputs -->
+    <div class="week-days">
+      <mat-form-field>
+        <mat-label>Sun</mat-label>
+        <input matInput type="number" formControlName="sun" min="0" max="24">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Mon</mat-label>
+        <input matInput type="number" formControlName="mon" min="0" max="24">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tue</mat-label>
+        <input matInput type="number" formControlName="tue" min="0" max="24">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Wed</mat-label>
+        <input matInput type="number" formControlName="wed" min="0" max="24">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Thu</mat-label>
+        <input matInput type="number" formControlName="thu" min="0" max="24">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fri</mat-label>
+        <input matInput type="number" formControlName="fri" min="0" max="24">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Sat</mat-label>
+        <input matInput type="number" formControlName="sat" min="0" max="24">
+      </mat-form-field>
+    </div>
+  
+    <!-- Remarks -->
+    <mat-form-field>
+      <mat-label>Remarks</mat-label>
+      <textarea matInput formControlName="remarks"></textarea>
+    </mat-form-field>
+  
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="timesheetForm.invalid">Submit</button>
+  </form>

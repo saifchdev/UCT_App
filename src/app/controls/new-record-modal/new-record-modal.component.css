@@ -1,0 +1,10 @@
+.week-days {
+    display: flex;
+    gap: 5px;
+    margin: 20px 0;
+  }
+  
+  mat-form-field {
+    width: 40%;
+    padding: 10px;
+  }
