@@ -21,7 +21,9 @@ import { materialDialogue } from './controls/material-dialogue/material-dialogue
 import { NewRecordModalComponent } from './controls/new-record-modal/new-record-modal.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import{MatInputModule} from '@angular/material/input';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { CustomDateAdapter } from './timesheet/controls/customer-date-adapter';
 @NgModule({
   declarations: [AppComponent, timesheetComponent, NavBarComponent, WeekSelectorComponent,materialDialogue, NewRecordModalComponent],
   imports: [
@@ -39,9 +41,14 @@ import{MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     NoopAnimationsModule,
     MatSnackBarModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    
   ],
   bootstrap: [AppComponent,timesheetComponent],
+  providers: [
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+  ],
 })
 export class AppModule {}

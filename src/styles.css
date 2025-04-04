@@ -2,3 +2,22 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+    --primary-color: #71631b;   /* Purple */
+    --accent-color: #ff4081;    /* Pink */
+    --warn-color: #f44336;      /* Red */
+  }
+  
+  .mat-toolbar {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+  }
+  
+  .mat-button {
+    color: var(--accent-color) !important;
+  }
+  
+  .mat-form-field-label {
+    color: var(--primary-color) !important;
+  }
+  

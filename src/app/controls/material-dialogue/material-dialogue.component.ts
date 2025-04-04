@@ -11,6 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class materialDialogue {
   projectCode: string;
   records: any[] = [];
+  selectedDate: string;
+
   displayedColumns: string[] =
   ['ActivityCode','Date','Hours Worked','Body','btndelete']; // Define table columns
   isEditing: boolean = false;
@@ -33,13 +35,15 @@ export class materialDialogue {
   ) {
  
     this.projectCode = data.ProjCode;
+    this.selectedDate = data.weekStart;
+
     // Deep copy for canceling edits
    this.originalRecords = JSON.parse(JSON.stringify(this.records));
   }
 
   fetchAllRecords(): void {
     console.log(this.projectCode);
-    this.apiService.getAllRecords(this.projectCode,this.dataService.getSelectedDate()).subscribe(
+    this.apiService.getAllRecords(this.projectCode,this.selectedDate).subscribe(
       (res: any) => {
         this.records = res;
         //console.log(res);

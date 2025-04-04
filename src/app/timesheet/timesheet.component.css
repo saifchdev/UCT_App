@@ -9,6 +9,8 @@ table {
       
   }
 
+ 
+
   /* Structure */
 .example-container {
   display: flex;
@@ -22,18 +24,19 @@ table {
   padding: 8px 24px 0;
 }
 .mat-mdc-header-row{
-background-color: rgb(196, 196, 196);
+  overflow: hidden;
+background-color: rgba(221, 221, 221, 0.5);
 
 }
 .mat-mdc-header-cell{
-  border: 0.5px solid #797979;
+  border: 0.2px solid #dbdbdb;
 }
 .mat-mdc-cell
 {
   border-left-style: solid;
   border-right-style: solid;
   border-width: 0.1px;
-  border-color: #797979;
+  border-color: #dbdbdb;
 
 }
 .mat-form-field {
@@ -74,4 +77,9 @@ padding-top: 20px;
 .button-center .mat-raised-button{
   background-color: #797979;
   margin: 3px;
+}
+
+form{
+  text-align: center;
+  padding : 10px;
 }

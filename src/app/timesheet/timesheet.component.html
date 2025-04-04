@@ -1,6 +1,18 @@
 <div class="container">
-<app-week-selector class="weekselector"  ></app-week-selector>
+<!-- <app-week-selector class="weekselector"  ></app-week-selector> -->
 
+<form [formGroup]="timesheetForm" >
+<mat-form-field appearance="fill">
+  <mat-label>Enter a date range</mat-label>
+  <mat-date-range-input [rangePicker]="weekPicker" formControlName="weekRange">
+    <input matStartDate placeholder="Start date" (dateChange)="getDatabyWeek($event.value)" >
+    <input matEndDate placeholder="End date" disabled>
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="weekPicker"></mat-datepicker-toggle>
+  <mat-date-range-picker #weekPicker [dateClass]="dateClass"></mat-date-range-picker>
+</mat-form-field>
+
+</form>
   <table mat-table *ngIf="isAvailable" #table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- ID Column -->
      
