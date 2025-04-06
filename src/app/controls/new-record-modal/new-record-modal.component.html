@@ -1,0 +1,82 @@
+<div class="container">
+  
+  <h2 mat-dialog-title>New Record</h2>
+<form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
+  <!-- Date Range Input with Week Picker -->
+  <mat-form-field appearance="fill">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="weekPicker" formControlName="weekRange">
+      <input matStartDate placeholder="Start date" (dateChange)="onWeekSelected($event)" >
+      <input matEndDate placeholder="End date" disabled>
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="weekPicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #weekPicker [dateClass]="dateClass"></mat-date-range-picker>
+  </mat-form-field>
+
+  <!-- Project Selection -->
+  <mat-form-field appearance="fill">
+    <mat-label>Project</mat-label>
+    <mat-select formControlName="projectId">
+      <mat-option *ngFor="let project of projects" [value]="project.projectId">
+        {{ project.projectCode }} - {{ project.country }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Auto-populated Fields -->
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <input matInput formControlName="country" readonly>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Project Code</mat-label>
+    <input matInput formControlName="projectCode" readonly>
+  </mat-form-field>
+
+  <!-- Code Dropdowns -->
+  <mat-form-field appearance="fill">
+    <mat-label>Discipline Code</mat-label>
+    <mat-select formControlName="disciplineCodeId">
+      <mat-option *ngFor="let code of disciplineCodes" [value]="code.disciplineCodeId">
+        {{ code.disciplineName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Stage Code</mat-label>
+    <mat-select formControlName="stageId">
+      <mat-option *ngFor="let code of stageCodes" [value]="code.stageId">
+        {{ code.stageName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Task Code</mat-label>
+    <mat-select formControlName="taskId">
+      <mat-option *ngFor="let code of taskCodes" [value]="code.taskId">
+        {{ code.taskName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Hours & Remarks for Each Weekday (Displayed Horizontally) -->
+  <div class="week-days">
+    <div class="day-row" *ngFor="let day of weekDates; let i = index">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ day || 'Select Week' }}</mat-label>
+        <input matInput type="number" [formControlName]="getDayControl(i)" min="0" max="24">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Remarks</mat-label>
+        <input matInput [formControlName]="getRemarkControl(i)">
+      </mat-form-field>
+      
+    </div>
+  </div>
+  
+
+  <!-- Submit Button -->
+  <button mat-raised-button color="primary" type="submit" [disabled]="timesheetForm.invalid">Submit</button>
+</form>
+</div>

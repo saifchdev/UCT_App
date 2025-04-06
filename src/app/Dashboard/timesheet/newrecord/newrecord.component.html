@@ -1,0 +1,183 @@
+<div class="container">
+    <h2 mat-dialog-title>New Record</h2>
+    <form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
+      <!-- Row 1: Date Range and Project Selection -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="weekPicker" formControlName="weekRange">
+            <input matStartDate placeholder="Start date" (dateChange)="onWeekSelected($event)">
+            <input matEndDate placeholder="End date" disabled>
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="weekPicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #weekPicker [dateClass]="dateClass"></mat-date-range-picker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Project</mat-label>
+          <mat-select formControlName="projectId">
+            <mat-option *ngFor="let project of projects" [value]="project.projectId">
+              {{ project.projectCode }} - {{ project.country }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" readonly>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+            <mat-label>Project Code</mat-label>
+            <input matInput formControlName="projectCode" readonly>
+          </mat-form-field>
+      </div>
+  
+      <!-- Row 2: Country and Project Code -->
+    
+  
+      <!-- Row 3: Discipline Code and Stage Code -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Discipline Code</mat-label>
+          <mat-select formControlName="disciplineCodeId">
+            <mat-option *ngFor="let code of disciplineCodes" [value]="code.disciplineCodeId">
+              {{ code.disciplineName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Stage Code</mat-label>
+          <mat-select formControlName="stageId">
+            <mat-option *ngFor="let code of stageCodes" [value]="code.stageId">
+              {{ code.stageName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Task Code</mat-label>
+            <mat-select formControlName="taskId">
+              <mat-option *ngFor="let code of taskCodes" [value]="code.taskId">
+                {{ code.taskName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+      </div>
+  
+      <!-- Row 4: Task Code (and potentially another field if needed) -->
+     
+  
+        <!-- Hours & Remarks for Each Weekday - Two pairs per row -->
+    <div class="week-days">
+        <!-- Row 1: Days 0 and 1 -->
+        <div class="week-days-row" *ngIf="weekDates.length > 0">
+          <!-- Day 0 -->
+          <div class="day-column">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[0] || 'Select Week' }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(0)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(0)">
+            </mat-form-field>
+          </div>
+  
+          <!-- Day 1 (if exists) -->
+          <div class="day-column" *ngIf="weekDates.length > 1">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[1] }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(1)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(1)">
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <!-- Row 2: Days 2 and 3 -->
+        <div class="week-days-row" *ngIf="weekDates.length > 2">
+          <!-- Day 2 -->
+          <div class="day-column">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[2] }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(2)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(2)">
+            </mat-form-field>
+          </div>
+  
+          <!-- Day 3 (if exists) -->
+          <div class="day-column" *ngIf="weekDates.length > 3">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[3] }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(3)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(3)">
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <!-- Row 3: Days 4 and 5 -->
+        <div class="week-days-row" *ngIf="weekDates.length > 4">
+          <!-- Day 4 -->
+          <div class="day-column">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[4] }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(4)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(4)">
+            </mat-form-field>
+          </div>
+  
+          <!-- Day 5 (if exists) -->
+          <div class="day-column" *ngIf="weekDates.length > 5">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[5] }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(5)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(5)">
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <!-- Row 4: Day 6 (if exists) -->
+        <div class="week-days-row" *ngIf="weekDates.length > 6">
+          <!-- Day 6 -->
+          <div class="day-column">
+            <mat-form-field appearance="fill" class="hours-field">
+              <mat-label>{{ weekDates[6] }}</mat-label>
+              <input matInput type="number" [formControlName]="getDayControl(6)" min="0" max="24">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="remarks-field">
+              <mat-label>Remarks</mat-label>
+              <input matInput [formControlName]="getRemarkControl(6)">
+            </mat-form-field>
+          </div>
+  
+          <!-- Empty column to maintain layout -->
+          <div class="day-column"></div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="timesheetForm.invalid">Submit</button>
+    </form>
+  </div>

@@ -1,0 +1,40 @@
+
+<script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+
+   
+<div class="topnav" id="myTopnav">
+    <img src="assets/logo.jpg" class="logo" style="width:90px;height:50px;">
+    <a  routerLink="/main/welcome" routerLinkActive="active">Home</a>
+    
+    <div class="dropdown">
+      <button class="dropbtn">Static Data 
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="/main/employee"routerLinkActive="active">Employees</a>
+        <a routerLink="/main/project"routerLinkActive="active">Projects</a>
+        <a routerLink="/main/codes"routerLinkActive="active" href="#">Codes</a>
+
+      </div>
+    </div> 
+    <a routerLink="/main/timesheet"routerLinkActive="active">Timesheet</a>
+
+
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    <nav style="float: right; margin-top: 10px;" *ngIf="isLoggedIn()">
+      <a routerLink="/main"></a>
+      <button mat-raised-button  (click)="logout()">Logout</button>
+    </nav>
+    
+  </div>
+ 
+  
