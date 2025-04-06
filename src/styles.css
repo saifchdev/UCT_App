@@ -3,15 +3,35 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 :root {
-    --primary-color: #71631b;   /* Purple */
-    --accent-color: #ff4081;    /* Pink */
-    --warn-color: #f44336;      /* Red */
+    --primary-color: #776a40 !important;   /* Purple */
+    --accent-color: #ff4081 !important;    /* Pink */
+    --warn-color: #f44336 !important;      /* Red */
   }
+
+  /* Define custom color variables */
+:root {
+  --md-sys-color-primary: #776a40 !important;       /* Your custom primary color */
+  --md-sys-color-on-primary: #020202 !important;    /* Text color on primary */
+}
+
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input
+{
+  caret-color: #776a40  !important;
+  color: #776a40 !important;
+}
+.mat-mdc-raised-button:not(:disabled)
+  {
+    background-color: #776a40 !important;
+  }
+
   
   .mat-toolbar {
     background-color: var(--primary-color) !important;
+
     color: white !important;
   }
+  
   
   .mat-button {
     color: var(--accent-color) !important;

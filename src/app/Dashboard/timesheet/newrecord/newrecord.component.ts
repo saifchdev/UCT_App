@@ -1,9 +1,9 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, forkJoin } from 'rxjs';
-import { TimesheetRecord } from '../../Models/timesheet-record';
+import { TimesheetRecord } from '../../../Models/timesheet-record';
 import { DateAdapter } from '@angular/material/core';
 import { MatDatepickerInputEvent, MatDateRangePicker } from '@angular/material/datepicker';
 import {
@@ -43,17 +43,17 @@ export class FiveDayRangeSelectionStrategy<D>
 }
 
 @Component({
-  selector: 'app-new-record-modal',
-  templateUrl: './new-record-modal.component.html',
-  styleUrls: ['./new-record-modal.component.css'],
+  selector: 'app-newrecord',
+  templateUrl: './newrecord.component.html',
+  styleUrls: ['./newrecord.component.css'],
   providers: [
-    {
-      provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
-      useClass: FiveDayRangeSelectionStrategy,
-    },
-  ],
+      {
+        provide: MAT_DATE_RANGE_SELECTION_STRATEGY,
+        useClass: FiveDayRangeSelectionStrategy,
+      },
+    ],
 })
-export class NewRecordModalComponent implements OnInit {
+export class NewrecordComponent implements OnInit {
   timesheetForm: FormGroup;
   projects: Project[] = [];
   disciplineCodes: DisciplineCode[] = [];

@@ -118,7 +118,8 @@ float: right;
 }
 
 .mat-mdc-raised-button:not(:disabled) {
-background-color: #efefef;
+background-color: #efefef !important;
+color: #efefef !important;
 margin: 3px;
 }
 

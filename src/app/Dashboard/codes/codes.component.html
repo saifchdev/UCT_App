@@ -1,0 +1,16 @@
+<div class="codes-container">
+    <h2>Codes Management</h2>
+    
+    <mat-tab-group mat-align-tabs="start" (selectedTabChange)="setActiveTab($event.tab.textLabel.toLowerCase())">
+
+    <mat-tab label="Task">
+        <app-task-codes *ngIf="activeTab === 'task'"></app-task-codes>
+      </mat-tab>
+      <mat-tab label="Discipline">
+        <app-discipline-codes *ngIf="activeTab === 'discipline'"></app-discipline-codes>
+      </mat-tab>
+      <mat-tab label="Stage">
+        <app-stage-codes *ngIf="activeTab === 'stage'"></app-stage-codes>
+      </mat-tab>
+    </mat-tab-group>
+  </div>

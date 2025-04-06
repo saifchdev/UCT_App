@@ -27,7 +27,49 @@ export class ApiService {
   }
 
 
- 
+  getEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/Employee`);
+  }
+
+  deleteEmployee(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/Employee/${id}`);
+  }
+
+  
+  getStageCode(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/Stages`);
+  }
+
+  deleteStageCode(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/Stages/${id}`);
+  }
+
+  
+  getProject(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/Project`);
+  }
+
+  deleteProject(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/Project/${id}`);
+  }
+  
+  
+  getTaskCodes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/TaskCodes`);
+  }
+
+  deleteTaskCodes(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/TaskCodes/${id}`);
+  }
+
+  getdisciplineCodes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/DisciplineCodes`);
+  }
+
+  deletedisciplineCodes(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/DisciplineCodes/${id}`);
+  }
+
 
   getProjects(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/Project`);
@@ -41,9 +83,6 @@ export class ApiService {
     return this.http.get<any[]>(`${this.apiUrl}/Stages`);
   }
 
-  getTaskCodes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/TaskCodes`);
-  }
 
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/Timesheet/${id}`);

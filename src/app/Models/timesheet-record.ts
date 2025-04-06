@@ -8,5 +8,5 @@ export interface TimesheetRecord {
     taskId: string;
     hoursWorked: number;     // Hours worked on the specific day
     dateWorked: string;      // Date in YYYY-MM-DD format (e.g., "2025-03-09")
-    remarks: string;
+    Notes: string;
   }

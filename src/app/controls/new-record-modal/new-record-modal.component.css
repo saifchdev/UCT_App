@@ -1,10 +1,25 @@
-.week-days {
-    display: flex;
-    gap: 5px;
-    margin: 20px 0;
+  *
+  {
+    font-size: 12px;
   }
-  
+
+  .container
+  {
+  flex: auto;
+  }
+
+  .week-days mat-form-field {
+    flex-wrap: wrap;
+  }
+
   mat-form-field {
-    width: 40%;
-    padding: 10px;
+    width: 20%;
+    padding: 3px;
   }
+
+  
+  
+.mat-mdc-raised-button:not(:disabled) {
+  background-color: #efefef !important;
+  margin: 3px;
+}
