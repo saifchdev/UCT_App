@@ -36,11 +36,15 @@ import { CodesComponent } from './Dashboard/codes/codes.component';
 import { TaskCodesComponent } from './Dashboard/codes/task-codes/task-codes.component';
 import { DisciplineCodesComponent } from './Dashboard/codes/discipline-codes/discipline-codes.component';
 import { StageCodesComponent } from './Dashboard/codes/stage-codes/stage-codes.component';
+import { TestdbComponent } from './testdb/testdb.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
 @NgModule({
-  declarations: [AppComponent, timesheetComponent, NavBarComponent,materialDialogue, NewRecordModalComponent, LoginComponent, MainComponent, WelcomeScreenComponent, NewrecordComponent, EmployeeComponent, ProjectsComponent, CodesComponent, TaskCodesComponent, DisciplineCodesComponent, StageCodesComponent],
+  declarations: [AppComponent, timesheetComponent, NavBarComponent,materialDialogue, NewRecordModalComponent, LoginComponent, MainComponent, WelcomeScreenComponent, NewrecordComponent, EmployeeComponent, ProjectsComponent, CodesComponent, TaskCodesComponent, DisciplineCodesComponent, StageCodesComponent, TestdbComponent],
   imports: [
     BrowserModule,
     HttpClientModule, // Added here
@@ -62,7 +66,11 @@ import { StageCodesComponent } from './Dashboard/codes/stage-codes/stage-codes.c
     AppRoutingModule,
     MatPaginatorModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+    MatMenuModule,
+    NgChartsModule
+
    
   ],
   bootstrap: [AppComponent,timesheetComponent],
