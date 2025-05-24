@@ -42,7 +42,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NgChartsModule } from 'ng2-charts';
 
 
-
+//To test
 @NgModule({
   declarations: [AppComponent, timesheetComponent, NavBarComponent,materialDialogue, NewRecordModalComponent, LoginComponent, MainComponent, WelcomeScreenComponent, NewrecordComponent, EmployeeComponent, ProjectsComponent, CodesComponent, TaskCodesComponent, DisciplineCodesComponent, StageCodesComponent, TestdbComponent],
   imports: [
